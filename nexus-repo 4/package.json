@@ -1,0 +1,33 @@
+{
+  "name": "nexus-trading-platform",
+  "version": "2.1.0",
+  "description": "NEXUS Institutional Trading Platform — serverless API + static frontend",
+  "private": true,
+  "engines": {
+    "node": "20.x"
+  },
+  "scripts": {
+    "test":       "jest --coverage --forceExit",
+    "test:watch": "jest --watch",
+    "test:ci":    "jest --coverage --ci --forceExit",
+    "lint":       "eslint api/ --ext .js",
+    "lint:fix":   "eslint api/ --ext .js --fix",
+    "dev":        "vercel dev",
+    "build":      "echo 'No build step needed'",
+    "db:seed":    "node -e \"const{Pool}=require('pg');const fs=require('fs');const p=new Pool({connectionString:process.env.DATABASE_URL});p.query(fs.readFileSync('database/init.sql','utf8')).then(()=>{console.log('DB seeded');p.end()}).catch(e=>{console.error(e);p.end();process.exit(1)})\""
+  },
+  "dependencies": {
+    "@anthropic-ai/sdk": "^0.30.0",
+    "bcrypt":            "^5.1.1",
+    "jsonwebtoken":      "^9.0.2",
+    "pg":                "^8.11.3",
+    "uuid":              "^9.0.0"
+  },
+  "devDependencies": {
+    "@types/jest":        "^29.5.12",
+    "eslint":             "^8.57.0",
+    "jest":               "^29.7.0",
+    "jest-junit":         "^16.0.0",
+    "supertest":          "^6.3.4"
+  }
+}
