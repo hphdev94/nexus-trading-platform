@@ -1,0 +1,55 @@
+{
+  "version": 2,
+  "outputDirectory": "public",
+  "rewrites": [
+    { "source": "/api/auth/register",          "destination": "/api/auth/register" },
+    { "source": "/api/auth/login",             "destination": "/api/auth/login" },
+    { "source": "/api/auth/logout",            "destination": "/api/auth/logout" },
+    { "source": "/api/auth/me",                "destination": "/api/auth/me" },
+    { "source": "/api/health",                 "destination": "/api/health/index" },
+    { "source": "/api/brokers",                "destination": "/api/brokers/index" },
+    { "source": "/api/accounts",               "destination": "/api/accounts/index" },
+    { "source": "/api/accounts/:id",           "destination": "/api/accounts/[id]" },
+    { "source": "/api/trades",                 "destination": "/api/trades/index" },
+    { "source": "/api/trades/:id",             "destination": "/api/trades/[id]" },
+    { "source": "/api/analytics/:account_id",  "destination": "/api/analytics/[account_id]" },
+    { "source": "/api/copy",                   "destination": "/api/copy/index" },
+    { "source": "/api/copy/:id",               "destination": "/api/copy/[id]" },
+    { "source": "/api/ai/chat",                "destination": "/api/ai/chat" },
+    { "source": "/api/ai/conversations",       "destination": "/api/ai/conversations" },
+    { "source": "/api/instruments",            "destination": "/api/instruments/index" },
+    { "source": "/api/audit",                  "destination": "/api/audit/index" },
+    { "source": "/api/calendar",               "destination": "/api/calendar/index" },
+    { "source": "/api/notifications",          "destination": "/api/notifications/index" },
+    { "source": "/api/notifications/:id",      "destination": "/api/notifications/index" },
+    { "source": "/api/admin/users",            "destination": "/api/admin/users" },
+    { "source": "/api/admin/stats",            "destination": "/api/admin/stats" },
+    { "source": "/(.*)",                       "destination": "/index.html" }
+  ],
+  "headers": [
+    {
+      "source": "/(.*)",
+      "headers": [
+        { "key": "X-Content-Type-Options", "value": "nosniff" },
+        { "key": "X-Frame-Options",        "value": "DENY" },
+        { "key": "X-XSS-Protection",       "value": "1; mode=block" },
+        { "key": "Referrer-Policy",        "value": "strict-origin-when-cross-origin" },
+        { "key": "Permissions-Policy",     "value": "camera=(), microphone=(), geolocation=()" }
+      ]
+    },
+    {
+      "source": "/api/(.*)",
+      "headers": [
+        { "key": "Access-Control-Allow-Origin",  "value": "*" },
+        { "key": "Access-Control-Allow-Methods", "value": "GET,POST,PUT,PATCH,DELETE,OPTIONS" },
+        { "key": "Access-Control-Allow-Headers", "value": "Content-Type, Authorization" }
+      ]
+    },
+    {
+      "source": "/public/(.*)",
+      "headers": [
+        { "key": "Cache-Control", "value": "public, max-age=31536000, immutable" }
+      ]
+    }
+  ]
+}
